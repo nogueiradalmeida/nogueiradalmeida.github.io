@@ -243,6 +243,15 @@ $(document).keydown(function(e){
       else
          screenClick();
    }
+
+   if(e.keyCode == 65) //letter a
+   {
+      //in ScoreScreen, hitting space should click the "replay" button. else it's just a regular spacebar hit
+      if(currentstate == states.ScoreScreen)
+         $("#replay").click();
+      else
+         screenClick();
+   }
 });
 
 //Handle mouse down OR touch start

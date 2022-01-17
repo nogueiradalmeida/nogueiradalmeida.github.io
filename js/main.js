@@ -13,6 +13,7 @@ var velocity = 0;
 var position = 180;
 var rotation = 0;
 var jump = -4.6;
+var bigJump = -9.0;
 var flyArea = $("#flyarea").height();
 
 var score = 0;
@@ -250,7 +251,7 @@ $(document).keydown(function(e){
       if(currentstate == states.ScoreScreen)
          $("#replay").click();
       else
-         screenClick();
+         screen4Click();
    }
 });
 
@@ -259,6 +260,19 @@ if("ontouchstart" in window)
    $(document).on("touchstart", screenClick);
 else
    $(document).on("mousedown", screenClick);
+
+function screen4Click()
+{
+   if(currentstate == states.GameScreen)
+   {
+      playerBigJump();
+   }
+   else if(currentstate == states.SplashScreen)
+   {
+      startGame();
+   }
+}
+
 
 function screenClick()
 {
@@ -279,6 +293,14 @@ function playerJump()
    soundJump.stop();
    soundJump.play();
 }
+function playerBigJump()
+{
+   velocity = bigJump;
+   //play jump sound
+   soundJump.stop();
+   soundJump.play();
+}
+
 
 function setBigScore(erase)
 {

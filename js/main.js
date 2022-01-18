@@ -1,4 +1,4 @@
-var debugmode = false;
+var debugmode = true;
 
 var states = Object.freeze({
    SplashScreen: 0,
@@ -6,6 +6,7 @@ var states = Object.freeze({
    ScoreScreen: 2
 });
 
+const DILUICAOCANOS = 1;
 var currentstate;
 
 var gravity = 0.25;
@@ -123,7 +124,7 @@ function startGame()
    //start up our loops
    var updaterate = 1000.0 / 60.0 ; //60 times a second
    loopGameloop = setInterval(gameloop, updaterate);
-   loopPipeloop = setInterval(updatePipes, 1400);
+   loopPipeloop = setInterval(updatePipes, 1000);
 
    //jump from the start!
    playerJump();
@@ -215,8 +216,7 @@ function gameloop() {
       }
       else
       {
-         //no! we touched the pipe
-         playerDead();
+         playerDead(); //no! we touched the pipe
          return;
       }
    }
@@ -233,7 +233,7 @@ function gameloop() {
    }
 }
 
-//Handle space bar
+//Handle space bar (check https://css-tricks.com/snippets/javascript/javascript-keycodes/)
 $(document).keydown(function(e){
    //space bar!
    if(e.keyCode == 32)
@@ -252,6 +252,23 @@ $(document).keydown(function(e){
          $("#replay").click();
       else
          screen4Click();
+   }
+
+   if(e.keyCode == 83) //letter s
+   {
+      //in ScoreScreen, hitting space should click the "replay" button. else it's just a regular spacebar hit
+      if(currentstate == states.ScoreScreen)
+         $("#replay").click();
+      else {
+         //yes, remove it
+         pipes.splice(0, 1);
+
+         //and score a point
+         playerScore();
+
+
+      }
+         
    }
 });
 
@@ -483,9 +500,14 @@ function updatePipes()
    var constraint = flyArea - pipeheight - (padding * 2); //double padding (for top and bottom)
    var topheight = Math.floor((Math.random()*constraint) + padding); //add lower padding
    var bottomheight = (flyArea - pipeheight) - topheight;
-   var newpipe = $('<div class="pipe animated"><div class="pipe_upper" style="height: ' + topheight + 'px;"></div><div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div></div>');
-   $("#flyarea").append(newpipe);
-   pipes.push(newpipe);
+
+   var aleatorio =  Math.floor((Math.random()*constraint))
+   console.log ("aleatorio : " + aleatorio)
+   if (aleatorio > DILUICAOCANOS ) { 
+      var newpipe = $('<div class="pipe animated" ><div class="pipe_upper" style=" height: ' + topheight + 'px;"></div><div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div></div>');
+      $("#flyarea").append(newpipe);
+      pipes.push(newpipe);
+   }
 }
 
 var isIncompatible = {

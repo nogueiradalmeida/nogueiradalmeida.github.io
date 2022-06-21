@@ -38,6 +38,7 @@
         <img id="chatbot-thumb" crossorigin="anonymous" src="../assets/pexels-laura-musikanski-6019019.jpg">
         
         <img id="pin" crossorigin="anonymous" src="../assets/pin.png">
+        <img id="chat" crossorigin="anonymous" src="../assets/chat.png">
 
         <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
         <img id="20floor1" src="../assets/20_andar_1.jpg">
@@ -45,10 +46,13 @@
         <img id="20floor3" src="../assets/20_andar_3.jpg">
         <img id="20floor4" src="../assets/20_andar_4.jpg">
 
-   
+        <a-asset-item id="triceratops"
+          src="https://cdn.aframe.io/examples/ar/models/triceratops/scene.gltf"
+          response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
 
         <video id="dicas_mpme" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4" poster="../assets/dicas_thumb.jpg"></video>
-        <video id="dicas_mpme2" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4" poster="../assets/dicas_thumb.jpg"></video>
+        <img id="full_screen" crossorigin="anonymous" src="../assets/full_screen.svg">
+        <!-- <video id="dicas_mpme2" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4" poster="../assets/dicas_thumb.jpg"></video> -->
 
       </a-assets>
 
@@ -61,11 +65,12 @@
       <a-entity id="links" layout="type: line; margin: 1.5" position="-2.25 -1 -4">
    
         <a-entity class="link"
-        geometry="primitive: plane; height: 1; width: 1"
-        material="shader: flat; src: #chatbot-thumb"
-        event-set__mouseenter="scale: 1.2 1.2 1"
-        event-set__mouseleave="scale: 1 1 1"
-        id="imgChatbot"
+          geometry="primitive: plane; height: 1; width: 1"
+          material="shader: flat; src: #chat"
+          event-set__mouseenter="scale: 1.2 1.2 1"
+          event-set__mouseleave="scale: 1 1 1"
+          id="imgChatbot"
+          redirect-to="url: https://chatbot.bndes.gov.br/atendimento"
         >
         </a-entity>
 
@@ -73,6 +78,7 @@
           document.getElementById("imgChatbot").addEventListener("click", function() 
           { window.open("https://chatbot.bndes.gov.br/atendimento", "_blank") })  
         </script>
+
 
 
         <a-entity template="src: #link" data-src="#20floor1" data-thumb="#20-andar-1-thumb"></a-entity>
@@ -87,14 +93,20 @@
           material="shader: flat; src: #dicas_mpme"
           play-pause-video
         ></a-entity>
-        <a-entity 
-          id="video"
-          class="link"
+        <!-- <a-entity class="link"
+          id="video2"
           geometry="primitive: plane; height: 1; width: 2" 
           material="shader: flat; src: #dicas_mpme2"
-          play-pause-video
-        ></a-entity>
+        ></a-entity> -->
+        <a-image class="link" id="video2" src="#full_screen" background="#white"></a-image>
+        <script>
+          document.getElementById("video2").addEventListener("click", function() 
+          { window.open("video-dicas.html", "_blank") })  
+        </script>
+
       </a-entity>
+
+      <a-entity gltf-model="#triceratops" scale="0.01 0.01 0.01" position="-3.5 -2 -4"></a-entity>
 
       <!-- Camera + cursor. -->
       <a-entity  mouse-cursor camera look-controls cursor="rayOrigin: mouse" raycaster="objects: .link">

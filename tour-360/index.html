@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>360&deg; Image Gallery</title>
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+    <script src="./redirect-to.js"></script>
+    <script src="./play-pause-video.js"></script>
+    <script src="./mouse-cursor.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> -->
+    
+    <!-- Image link template to be reused. -->
+    <script id="link" type="text/html">
+      <a-entity class="link"
+        look-at="[camera]" 
+        geometry="primitive: plane; height: 1; width: 1"
+        material="shader: flat; src: ${thumb}"
+        event-set__mouseenter="scale: 1.2 1.2 1"
+        event-set__mouseleave="scale: 1 1 1"
+        event-set__click="_target: #image-360; _delay: 300; material.src: ${src}"
+        proxy-event="event: click; to: #image-360; as: fade"
+        sound="on: click; src: #click-sound"></a-entity>
+    </script>
+    <script src="model-viewer.js"></script>
+  </head>
+  <body>   
+    <a-scene>
+      <a-assets>
+        <img id="20-andar-1-thumb" crossorigin="anonymous" src="../assets/20_andar_1.jpg">
+        <img id="20-andar-2-thumb" crossorigin="anonymous" src="../assets/20_andar_2.jpg">
+        <img id="20-andar-3-thumb" crossorigin="anonymous" src="../assets/20_andar_3.jpg">
+        <img id="20-andar-4-thumb" crossorigin="anonymous" src="../assets/20_andar_4.jpg">
+        <img id="chatbot-thumb" crossorigin="anonymous" src="../assets/pexels-laura-musikanski-6019019.jpg">
+        
+        <img id="pin" crossorigin="anonymous" src="../assets/pin.png">
+
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="20floor1" src="../assets/20_andar_1.jpg">
+        <img id="20floor2" src="../assets/20_andar_2.jpg">
+        <img id="20floor3" src="../assets/20_andar_3.jpg">
+        <img id="20floor4" src="../assets/20_andar_4.jpg">
+
+   
+
+        <video id="dicas_mpme" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4" poster="../assets/dicas_thumb.jpg"></video>
+        <video id="dicas_mpme2" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4" poster="../assets/dicas_thumb.jpg"></video>
+
+      </a-assets>
+
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#20floor1"
+             animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+             animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"></a-sky>
+
+      <!-- Image links. -->
+      <a-entity id="links" layout="type: line; margin: 1.5" position="-2.25 -1 -4">
+   
+        <a-entity class="link"
+        geometry="primitive: plane; height: 1; width: 1"
+        material="shader: flat; src: #chatbot-thumb"
+        event-set__mouseenter="scale: 1.2 1.2 1"
+        event-set__mouseleave="scale: 1 1 1"
+        id="imgChatbot"
+        >
+        </a-entity>
+
+        <script>
+          document.getElementById("imgChatbot").addEventListener("click", function() 
+          { window.open("https://chatbot.bndes.gov.br/atendimento", "_blank") })  
+        </script>
+
+
+        <a-entity template="src: #link" data-src="#20floor1" data-thumb="#20-andar-1-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#20floor2" data-thumb="#20-andar-2-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#20floor3" data-thumb="#20-andar-3-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#20floor4" data-thumb="#20-andar-4-thumb"></a-entity>
+        <a-image src="#pin"></a-image>
+        <a-entity 
+          id="video"
+          class="link"
+          geometry="primitive: plane; height: 1; width: 2" 
+          material="shader: flat; src: #dicas_mpme"
+          play-pause-video
+        ></a-entity>
+        <a-entity 
+          id="video"
+          class="link"
+          geometry="primitive: plane; height: 1; width: 2" 
+          material="shader: flat; src: #dicas_mpme2"
+          play-pause-video
+        ></a-entity>
+      </a-entity>
+
+      <!-- Camera + cursor. -->
+      <a-entity  mouse-cursor camera look-controls cursor="rayOrigin: mouse" raycaster="objects: .link">
+      </a-entity>
+    </a-scene>
+  </body>
+</html>

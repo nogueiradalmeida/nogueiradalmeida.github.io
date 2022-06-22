@@ -28,7 +28,7 @@ AFRAME.registerComponent('mouse-cursor', {
                 color: "black"
             });
             cursor.setAttribute("raycaster", {
-                objects: ".link"
+                objects: ".clickable"
             });
 
             this.el.appendChild(cursor);

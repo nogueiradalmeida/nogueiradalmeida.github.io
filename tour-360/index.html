@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>360&deg; Image Gallery</title>
     <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="obfuscated.js"></script>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
@@ -12,11 +13,12 @@
     <script src="./redirect-to.js"></script>
     <script src="./play-pause-video.js"></script>
     <script src="./mouse-cursor.js"></script>
+    <script src="./play-at-video-frame.js"></script>
     <!-- <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> -->
     
     <!-- Image link template to be reused. -->
     <script id="link" type="text/html">
-      <a-entity class="link"
+      <a-entity class="clickable"
         look-at="[camera]" 
         geometry="primitive: plane; height: 1; width: 1"
         material="shader: flat; src: ${thumb}"
@@ -64,7 +66,7 @@
       <!-- Image links. -->
       <a-entity id="links" layout="type: line; margin: 1.5" position="-5.25 -1 -5">
    
-        <a-entity class="link"
+        <a-entity class="clickable"
           geometry="primitive: plane; height: 1; width: 1"
           material="shader: flat; src: #chat"
           event-set__mouseenter="scale: 1.2 1.2 1"
@@ -74,42 +76,24 @@
         >
         </a-entity>
 
-        <script>
-          document.getElementById("imgChatbot").addEventListener("click", function() 
-          { window.open("https://chatbot.bndes.gov.br/atendimento", "_blank") })  
-        </script>
-
-
-
         <a-entity template="src: #link" data-src="#20floor1" data-thumb="#20-andar-1-thumb"></a-entity>
         <a-entity template="src: #link" data-src="#20floor2" data-thumb="#20-andar-2-thumb"></a-entity>
         <a-entity template="src: #link" data-src="#20floor3" data-thumb="#20-andar-3-thumb"></a-entity>
         <a-entity template="src: #link" data-src="#20floor4" data-thumb="#20-andar-4-thumb"></a-entity>
         <a-image src="#pin"></a-image>
-        <a-entity 
-          id="video"
-          class="link"
-          geometry="primitive: plane; height: 1; width: 2" 
-          material="shader: flat; src: #dicas_mpme"
-          play-pause-video
-        ></a-entity>
-        <!-- <a-entity class="link"
-          id="video2"
-          geometry="primitive: plane; height: 1; width: 2" 
-          material="shader: flat; src: #dicas_mpme2"
-        ></a-entity> -->
-        <a-image class="link" id="video2" src="#full_screen" background="#white"></a-image>
-        <script>
-          document.getElementById("video2").addEventListener("click", function() 
-          { window.open("video-dicas.html", "_blank") })  
-        </script>
-
+        <a-image 
+          class="clickable" 
+          id="video2" 
+          src="#full_screen" 
+          background="#white"
+          play-at-video-frame="src: dicas_mpme"
+        ></a-image>
       </a-entity>
 
       <!-- <a-entity gltf-model="#triceratops" scale="0.01 0.01 0.01" position="-3.5 -2 -4"></a-entity> -->
 
       <!-- Camera + cursor. -->
-      <a-entity  mouse-cursor camera look-controls cursor="rayOrigin: mouse" raycaster="objects: .link">
+      <a-entity  mouse-cursor camera look-controls cursor="rayOrigin: mouse" raycaster="objects: .clickable">
       </a-entity>
     </a-scene>
   </body>

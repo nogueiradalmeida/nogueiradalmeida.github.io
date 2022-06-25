@@ -23,7 +23,8 @@
         <img id="chatbot-thumb" crossorigin="anonymous" src="../assets/pexels-laura-musikanski-6019019.jpg">
         
         <img id="pin" crossorigin="anonymous" src="../assets/pin.png">
-        <img id="chat" crossorigin="anonymous" src="../assets/contato.png">
+        <img id="canal" crossorigin="anonymous" src="../assets/canal_mpme2.png">
+        <img id="contato" crossorigin="anonymous" src="../assets/contato.png">
 
         <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
         <img id="20floor1" src="../assets/20_andar_1.jpg">
@@ -31,17 +32,20 @@
         <img id="20floor3" src="../assets/20_andar_3.jpg">
         <img id="20floor4" src="../assets/20_andar_4.jpg">
 
+        <a-asset-item id="robot"
+          src="../assets/robot.gltf"
+          response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+
         <video id="dicas_mpme" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4" poster="../assets/dicas_thumb.jpg"></video>
         <img id="dicas_mpme_thumb" crossorigin="anonymous" src="../assets/dicas_thumb.jpg">
 
       </a-assets>
 
       <!-- 360-degree image. -->
-      <a-sky tour id="image-360" radius="10" src="#20floor1"
+      <a-sky tour id="image-360" radius="10" src="#20floor1" 
              animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
              animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"></a-sky>
 
-      <!-- <a-entity gltf-model="#triceratops" scale="0.01 0.01 0.01" position="-3.5 -2 -4"></a-entity> -->
       <!-- Camera + cursor. -->
       <a-entity  mouse-cursor camera look-controls cursor="rayOrigin: mouse" raycaster="objects: .clickable">
       </a-entity>

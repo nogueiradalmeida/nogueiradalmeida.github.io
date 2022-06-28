@@ -11,7 +11,7 @@
                     if ( code != null && code != undefined ) {
                         code = code.replace("?code=", '');
                         console.log(code);
-                        var url = `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=${clientId}&client_secret=${secret}&code=${code}&state=55811&redirect_uri=https://nogueiradalmeida.github.io/retorno.html&callback=?`
+                        var url = `https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=${clientId}&client_secret=${secret}&code=${code}&state=55811&redirect_uri=https://nogueiradalmeida.github.io/retorno.html`
                         var windowObjectReference = window.open(url)
                         console.log(windowObjectReference)
                         // $.getJSON()
@@ -32,6 +32,11 @@
                         console.log(access_token);
                         window.open(`https://api.linkedin.com/v2/me`)
                     }
+
+                    document.getElementById("req").textContent = 
+                    `GET https://api.linkedin.com/v2/me
+                     Content-Type: application/json
+                     Authorization: Bearer ${access_token}`
                     
                     //         .done(function(data) {
                     //                 console.log('data', data);
@@ -49,7 +54,9 @@
 </script>
 
 <button type="button">Carrega Token de Acesso</button>
-    
+<br>
+<br>
+<textarea id="req" height="3000"></textarea>    
 
 
 

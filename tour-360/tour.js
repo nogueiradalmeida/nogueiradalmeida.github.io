@@ -1,8 +1,8 @@
 AFRAME.registerComponent('tour', {
-    init: function() {
+    init: function () {
         const scene = this.el.sceneEl;
         const id = this.el.components.material.data.src.id;
-        
+
         addElements(id, scene);
     }
 });
@@ -63,14 +63,14 @@ const addImages = (sphere, scene) => {
 
         entity.setAttribute("src", image.src);
         entity.setAttribute("geometry", { primitive: 'plane', height: 1, width: 1 });
-        entity.setAttribute("material", {shader: "flat"});
+        entity.setAttribute("material", { shader: "flat" });
 
         entity.setAttribute("position", image.position);
         if (image.rotation) {
             entity.setAttribute("rotation", image.rotation);
         }
         if (image.href) {
-            entity.setAttribute("redirect-to", {url: image.href})
+            entity.setAttribute("redirect-to", { url: image.href })
         }
         if (image.animation) {
             entity.setAttribute("animation", image.animation)
@@ -81,7 +81,7 @@ const addImages = (sphere, scene) => {
 
         scene.appendChild(entity);
     }
-} 
+}
 
 const addVideos = (sphere, scene) => {
     if (!sphere.videos) return;
@@ -92,7 +92,7 @@ const addVideos = (sphere, scene) => {
         entity.setAttribute("src", video.thumb);
         entity.setAttribute("geometry", { primitive: 'plane', height: 1.3, width: 2.1 });
         entity.setAttribute("background", "#white");
-        entity.setAttribute("play-at-video-frame", {src: video.src })
+        entity.setAttribute("play-at-video-frame", { src: video.src })
 
         entity.setAttribute("position", video.position);
         if (video.rotation) {
@@ -104,14 +104,14 @@ const addVideos = (sphere, scene) => {
 
         scene.appendChild(entity);
     }
-} 
+}
 
 const addModels = (sphere, scene) => {
     if (!sphere.models) return;
 
     for (const model of sphere.models) {
         const entity = document.createElement('a-entity');
-  
+
         entity.setAttribute("gltf-model", model.src);
         entity.setAttribute("position", model.position);
         entity.setAttribute("scale", model.scale);
@@ -119,7 +119,7 @@ const addModels = (sphere, scene) => {
             entity.setAttribute("rotation", model.rotation);
         }
         if (model.href) {
-            entity.setAttribute("redirect-to", {url: model.href} )
+            entity.setAttribute("redirect-to", { url: model.href })
         }
 
         entity.classList.add('gui');
@@ -127,7 +127,7 @@ const addModels = (sphere, scene) => {
 
         scene.appendChild(entity);
     }
-} 
+}
 
 const floatAnimation = (position) => {
     const coordinates = position.split(" ");
@@ -135,90 +135,122 @@ const floatAnimation = (position) => {
     return `property: position; dir: alternate; dur:1000; easing: linear; to: ${coordinates.join(" ")}; loop: true; autoplay: true`
 }
 
-let numeroAleatorio = Math.round(Math.random()*10000000000000000);
+let numeroAleatorio = Math.round(Math.random() * 10000000000000000);
 let urlAtendimento = "https://meet.jit.si/atendimentohumano" + numeroAleatorio;//ideia
 urlAtendimento = "https://www.bndes.gov.br/wps/portal/site/home/quem-somos/canais-atendimento/fale-conosco--formulario-geral/!ut/p/z0/fY5NT8MwEER_C4ccrd3ShoqjVWgDSflUUfCl2iZOaoh3m9hB_HwC4sCJ40gz7w0YKMEwfbiWohOmbsqv5mK_fNysMr2YFZg-rFHP8S672e0QiyXcgpkKxWV-nS3usdg84Qx1mq_1y1U-x2f8JpwP29W2BXOieFSOG4Gyoc6qSlhCJb-MfyQTw731vdFgpk20nxHKA9c27B2H6OJY_bxN8CjeJtiP1qsgXkKCFTG5oGqrKFqunbccJcG_ftXI4MeOBidwejeHtGvPvgAKeXmE/"
 
 const spheres = {
-    "20floor1": {
+    "sala-de-reuniao-4-pessoas": {
         waypoints: [
             {
-                src: "#20floor3", 
-                position: "3 -1 -5", 
-                animation: floatAnimation("3 -1 -5")
-            }, //sala reunião
+                src: "#corner-sala-reuniao",
+                position: "3 0 2",
+                rotation: "0 45 0",
+                animation: floatAnimation("3 0 2"),
+            }
+        ]
+    },
+    "corner-sala-reuniao": {
+        waypoints: [
             {
-                src: "#20floor4", 
+                src: "#corner-imprensa",
+                position: "9 0 0",
+                rotation: "0 90 0",
+                animation: floatAnimation("9 0 0")
+            },
+            {
+                src: "#sala-de-reuniao-4-pessoas",
+                position: "-4 0 -.7",
+                rotation: "0 90 0 ",
+                animation: floatAnimation("-4 0 -.7")
+            },
+        ]
+    },
+    "corner-imprensa": {
+        waypoints: [
+            {
+                src: "#sala-imprensa",
+                position: "3 -1 -5",
+                animation: floatAnimation("3 -1 -5")
+            },
+            {
+                src: "#lounge-imprensa",
                 position: "0 0 9",
                 animation: floatAnimation("0 0 9")
-            } //sofás
+            },
+            {
+                src: "#corner-sala-reuniao",
+                position: "-9 0 -1",
+                rotation: "0 90 0",
+                animation: floatAnimation("-9 0 -1"),
+            },
         ],
         images: [
             {
-                src: "#canal", 
-                position: "-2.5 0 -5", 
+                src: "#canal",
+                position: "-2.5 0 -5",
                 href: "https://ws.bndes.gov.br/canal-mpme/#/home",
                 animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
             }
         ]
     },
-    "20floor2": {
+    "hall-elevadores": {
         waypoints: [
             {
-                src: "#20floor4", 
+                src: "#lounge-imprensa",
                 position: "-0.2 -0.5 9",
                 animation: floatAnimation("-0.2 -0.5 9")
             }, //entrada sala
         ],
-        
+
         images: [
             {
-                src: "#contato", 
-                position: "0.4 -1.0 -4", 
-                href: urlAtendimento ,
+                src: "#contato",
+                position: "0.4 -1.0 -4",
+                href: urlAtendimento,
                 animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
             }
         ]
     },
-    "20floor3": {
+    "sala-imprensa": {
         waypoints: [
             {
-                src: "#20floor1", 
+                src: "#corner-imprensa",
                 position: "5.7 -0.5 5",
                 animation: floatAnimation("5.7 -0.5 5")
             }, //entrada sala
         ],
         videos: [
-            {thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-1 -0.05 5", rotation: "0 180 0"},
-            {thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "3.6 -0.2 1.3", rotation: "0 270 -2"},
-            {thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-6 0 5", rotation: "0 180 0"},
-            {thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.5 0 3.5", rotation: "0 180 0"},
-            {thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-4.5 -0.6 -7.3", rotation: "9 3 0"},
-            {thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.0 -0.6 -4.2", rotation: "6 3 0"}
+            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-1 -0.05 5", rotation: "0 180 0" },
+            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "3.6 -0.2 1.3", rotation: "0 270 -2" },
+            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-6 0 5", rotation: "0 180 0" },
+            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.5 0 3.5", rotation: "0 180 0" },
+            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-4.5 -0.6 -7.3", rotation: "9 3 0" },
+            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.0 -0.6 -4.2", rotation: "6 3 0" }
         ]
     },
-    "20floor4": {
+    "lounge-imprensa": {
         waypoints: [
             {
-                src: "#20floor1", 
+                src: "#corner-imprensa",
                 position: "2.2 0.2 -9",
                 animation: floatAnimation("2.2 0.2 -9")
             }, //entrada sala
             {
-                src: "#20floor2", 
-                position: "-8 0 -0.2", 
+                src: "#hall-elevadores",
+                position: "-8 0 -0.2",
                 rotation: "0 90 0",
                 animation: floatAnimation("-8 0 -0.2")
             }, //hall elevadores
         ],
         models: [
             {
-                src: "#robot", 
+                src: "#robot",
                 href: "https://chatbot.bndes.gov.br/atendimento",
                 scale: "2.1 2.1 2.1",
-                position: "-5.5 -3.2 -3", 
+                position: "-5.5 -3.2 -3",
                 rotation: "0 90 0",
             }
-        ] 
+        ]
     }
 }

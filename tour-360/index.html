@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>360&deg; Image Gallery</title>
-    <meta name="description" content="360&deg; Image Gallery - A-Frame">
-    <script src="obfuscated.js"></script>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
-    <!-- <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
+
+<head>
+  <meta charset="utf-8">
+  <title>360&deg; Image Gallery</title>
+  <meta name="description" content="360&deg; Image Gallery - A-Frame">
+  <script src="obfuscated.js"></script>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
+  <!-- <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
     <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script> -->
-    <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
-    <script src="./redirect-to.js"></script>
-    <script src="./play-pause-video.js"></script>
-    <script src="./mouse-cursor.js"></script>
-    <script src="./play-at-video-frame.js"></script>
-    <script src="./tour.js"></script>
-    <!-- <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> -->
-  </head>
-  <body>   
-    <a-scene>
-      <a-assets>
-        <img id="chatbot-thumb" crossorigin="anonymous" src="../assets/pexels-laura-musikanski-6019019.jpg">
-        
-        <img id="pin" crossorigin="anonymous" src="../assets/pin.png">
-        <img id="canal" crossorigin="anonymous" src="../assets/canal_mpme2.png">
-        <img id="contato" crossorigin="anonymous" src="../assets/contato.png">
+  <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+  <script src="./redirect-to.js"></script>
+  <script src="./play-pause-video.js"></script>
+  <script src="./mouse-cursor.js"></script>
+  <script src="./play-at-video-frame.js"></script>
+  <script src="./tour.js"></script>
+  <!-- <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> -->
+</head>
 
-        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
-        <img id="20floor1" src="../assets/20_andar_1.jpg">
-        <img id="20floor2" src="../assets/20_andar_2.jpg">
-        <img id="20floor3" src="../assets/20_andar_3.jpg">
-        <img id="20floor4" src="../assets/20_andar_4.jpg">
+<body>
+  <a-scene>
+    <a-assets>
+      <img id="chatbot-thumb" crossorigin="anonymous" src="../assets/pexels-laura-musikanski-6019019.jpg">
 
-        <a-asset-item id="robot"
-          src="../assets/robot.gltf"
-          response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+      <img id="pin" crossorigin="anonymous" src="../assets/pin.png">
+      <img id="canal" crossorigin="anonymous" src="../assets/canal_mpme2.png">
+      <img id="contato" crossorigin="anonymous" src="../assets/contato.png">
 
-        <video id="dicas_mpme" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4" poster="../assets/dicas_thumb.jpg"></video>
-        <img id="dicas_mpme_thumb" crossorigin="anonymous" src="../assets/dicas_thumb.jpg">
+      <audio id="click-sound" crossorigin="anonymous"
+        src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+      <img id="corner-imprensa" src="../assets/360/corner-imprensa.jpg">
+      <img id="hall-elevadores" src="../assets/360/hall-elevadores.jpg">
+      <img id="sala-imprensa" src="../assets/360/sala-imprensa.jpg">
+      <img id="lounge-imprensa" src="../assets/360/lounge-imprensa.jpg">
+      <img id="corner-sala-reuniao" src="../assets/360/corner-sala-reuniao.jpg">
+      <img id="sala-de-reuniao-4-pessoas" src="../assets/360/sala-de-reuniao-4-pessoas.JPG">
 
-      </a-assets>
+      <a-asset-item id="robot" src="../assets/robot.gltf" response-type="arraybuffer" crossorigin="anonymous">
+      </a-asset-item>
 
-      <!-- 360-degree image. -->
-      <a-sky tour id="image-360" radius="10" src="#20floor1" 
-             animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
-             animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"></a-sky>
+      <video id="dicas_mpme" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4"
+        poster="../assets/dicas_thumb.jpg"></video>
+      <img id="dicas_mpme_thumb" crossorigin="anonymous" src="../assets/dicas_thumb.jpg">
 
-      <!-- Camera + cursor. -->
-      <a-entity  mouse-cursor camera look-controls cursor="rayOrigin: mouse" raycaster="objects: .clickable">
-      </a-entity>
-    </a-scene>
-  </body>
+    </a-assets>
+
+    <!-- 360-degree image. -->
+    <a-sky tour id="image-360" radius="10" 
+      src="#corner-imprensa"
+      animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+      animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade">
+    </a-sky>
+
+    <!-- Camera + cursor. -->
+    <a-entity mouse-cursor camera look-controls cursor="rayOrigin: mouse" raycaster="objects: .clickable">
+    </a-entity>
+  </a-scene>
+</body>
+
 </html>

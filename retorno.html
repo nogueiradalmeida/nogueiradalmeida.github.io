@@ -11,7 +11,14 @@
                     if ( code != null && code != undefined ) {
                         code = code.replace("?code=", '');
                         console.log(code);
-                        window.open(`https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=${clientId}&client_secret=${secret}&code=${code}&state=55811&redirect_uri=https://nogueiradalmeida.github.io/retorno.html`)
+                        $.getJSON(`https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=${clientId}&client_secret=${secret}&code=${code}&state=55811&redirect_uri=https://nogueiradalmeida.github.io/retorno.html`)
+                                .done(function(data) {
+                                        console.log('data', data);
+                                })
+                                .fail(function(data) {
+                                        console.log('failed', data);
+                                });
+                        //window.open(`https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&client_id=${clientId}&client_secret=${secret}&code=${code}&state=55811&redirect_uri=https://nogueiradalmeida.github.io/retorno.html`)
                     }
 
                     var token = window.location.search;

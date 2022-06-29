@@ -33,6 +33,24 @@
 <br>
 <br>
 <textarea id="req" height="3000"></textarea>    
+<br>
+
+<script src='https://meet.jit.si/external_api.js'></script>
+
+<script>
+    const domain = 'meet.jit.si';
+    let numeroAleatorio = Math.round(Math.random() * 10000000000000000);
+    let sala = "atd" + numeroAleatorio;//ideia
+    console.log(sala);
+    const options = {
+        roomName: sala,
+        width: 700,
+        height: 700,
+        lang: 'pt'
+    };
+    const api = new JitsiMeetExternalAPI(domain, options);
+    api.executeCommand('stopShareVideo');
+</script>
 
 
 

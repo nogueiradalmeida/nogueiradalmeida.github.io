@@ -17,10 +17,17 @@ const addElements = (id, scene) => {
 
     if (!sphere) return;
 
+    changeSkyRotation(sphere);
     addWaypoints(sphere, scene);
     addVideos(sphere, scene);
     addImages(sphere, scene);
     addModels(sphere, scene);
+}
+
+const changeSkyRotation = (sphere, el) => {
+    if (!sphere.rotation) return;
+    const sky = document.getElementById("image-360");
+    sky.setAttribute("rotation", sphere.rotation);
 }
 
 const addWaypoints = (sphere, scene) => {
@@ -28,7 +35,7 @@ const addWaypoints = (sphere, scene) => {
 
     for (const waypoint of sphere.waypoints) {
         const entity = document.createElement('a-image');
-
+ 
         entity.setAttribute("src", "#pin");
         entity.setAttribute("geometry", { primitive: 'plane', height: 1, width: 1 });
         entity.setAttribute("event-set__mouseenter", { scale: "1.2 1.2 1" });
@@ -151,6 +158,7 @@ const spheres = {
         ]
     },
     "corner-sala-reuniao": {
+        rotation: "0 -45 0",
         waypoints: [
             {
                 src: "#corner-imprensa",
@@ -167,6 +175,7 @@ const spheres = {
         ]
     },
     "corner-imprensa": {
+        rotation: "0 -130 0",
         waypoints: [
             {
                 src: "#sala-imprensa",
@@ -188,13 +197,15 @@ const spheres = {
         images: [
             {
                 src: "#canal",
-                position: "-2.5 0 -5",
+                position: "-5.95 0.9 -3.1",
+                rotation: "1 0 0",
                 href: "https://ws.bndes.gov.br/canal-mpme/#/home",
                 animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
             }
         ]
     },
     "hall-elevadores": {
+        rotation: "0 90 0",
         waypoints: [
             {
                 src: "#lounge-imprensa",
@@ -213,6 +224,7 @@ const spheres = {
         ]
     },
     "sala-imprensa": {
+        rotation: "0 192 0",
         waypoints: [
             {
                 src: "#corner-imprensa",
@@ -221,15 +233,17 @@ const spheres = {
             }, //entrada sala
         ],
         videos: [
-            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-1 -0.05 5", rotation: "0 180 0" },
-            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "3.6 -0.2 1.3", rotation: "0 270 -2" },
-            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-6 0 5", rotation: "0 180 0" },
-            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.5 0 3.5", rotation: "0 180 0" },
-            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-4.5 -0.6 -7.3", rotation: "9 3 0" },
-            { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.0 -0.6 -4.2", rotation: "6 3 0" }
+             { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-2.6 0.5 7", rotation: "0 193 0" }
+            
+            // { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "3.6 -0.2 1.3", rotation: "0 270 -2" },
+            // { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-6 0 5", rotation: "0 180 0" },
+            // { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.5 0 3.5", rotation: "0 180 0" },
+            // { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-4.5 -0.6 -7.3", rotation: "9 3 0" },
+            // { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.0 -0.6 -4.2", rotation: "6 3 0" }
         ]
     },
     "lounge-imprensa": {
+        rotation: "0 180 0",
         waypoints: [
             {
                 src: "#corner-imprensa",

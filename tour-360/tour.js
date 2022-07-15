@@ -174,6 +174,16 @@ const spheres = {
             },
         ]
     },
+    "sala-2007-reuniao-4-pessoas":{
+        waypoints: [
+            {
+                src: "#corner-2005-reunioes",
+                position: "-2 0 2",
+                rotation: "0 90 0",
+                animation: floatAnimation("-2 0 2"),
+            }
+        ]
+    },
     "corner-imprensa": {
         rotation: "0 -130 0",
         waypoints: [
@@ -223,6 +233,31 @@ const spheres = {
             }
         ]
     },
+    "corner-2005-reunioes" : {
+        rotation: "0 180 0",
+        waypoints: [
+            {
+                src: "#corner-2001-multiuso",
+                position: "0.2 0.2 -9",
+                animation: floatAnimation("0.2 0.2 -9")
+            }, //entrada sala            
+            {
+                src: "#sala-2007-reuniao-4-pessoas",
+                position: "-1.0 -0.4 5",
+                rotation: "0 0 0",
+                animation: floatAnimation("-1.0 -0.4 5")
+            },//outro canto da sala            
+        ],
+        models: [
+            {
+                src: "#robot",
+                href: "https://chatbot.bndes.gov.br/atendimento",
+                scale: "2.1 2.1 2.1",
+                position: "-5.5 -3.2 -3",
+                rotation: "0 90 0",
+            }
+        ]
+    },   
     "sala-imprensa": {
         rotation: "0 192 0",
         waypoints: [
@@ -242,6 +277,16 @@ const spheres = {
             // { thumb: "#dicas_mpme_thumb", src: "dicas_mpme", position: "-8.0 -0.6 -4.2", rotation: "6 3 0" }
         ]
     },
+    "sala-multiuso-centro" : {
+        rotation: "0 192 0",
+        waypoints: [
+            {
+                src: "#corner-2001-multiuso",
+                position: "5.7 -0.5 5",
+                animation: floatAnimation("5.7 -0.5 5")
+            }, //entrada sala
+        ]
+    },
     "lounge-imprensa": {
         rotation: "0 180 0",
         waypoints: [
@@ -256,6 +301,12 @@ const spheres = {
                 rotation: "0 90 0",
                 animation: floatAnimation("-8 0 -0.2")
             }, //hall elevadores
+            {
+                src: "#corner-2001-multiuso",
+                position: "-1.5 -0.9 5",
+                rotation: "0 0 0",
+                animation: floatAnimation("-1.5 -0.9 5")
+            },//outro canto da sala            
         ],
         models: [
             {
@@ -264,6 +315,38 @@ const spheres = {
                 scale: "2.1 2.1 2.1",
                 position: "-5.5 -3.2 -3",
                 rotation: "0 90 0",
+            }
+        ]
+    },
+    "corner-2001-multiuso": {
+        rotation: "0 -110 0",
+        waypoints: [
+            {
+                src: "#lounge-imprensa",
+                position: "-4.2 -0.5 -1",
+                rotation: "0 100 0",
+                animation: floatAnimation("-4.2 -0.5 -1")
+            }, //entrada sala
+            {
+                src: "#corner-2005-reunioes",
+                position: "-2.2 -0.5 9",
+                animation: floatAnimation("-2.2 -0.5 9")
+            }, //corredor
+            {
+                src: "#sala-multiuso-centro",
+                position: "4.2 -0.5 -3",
+                rotation: "0 100 0",
+                animation: floatAnimation("4.2 -0.5 -3")
+            }, //sala-multiuso-centro
+            
+        ],
+
+        images: [
+            {
+                src: "#contato",
+                position: "0.4 -1.0 -4",
+                href: urlAtendimento,
+                animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
             }
         ]
     }

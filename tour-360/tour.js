@@ -211,6 +211,13 @@ const spheres = {
                 rotation: "1 0 0",
                 href: "https://ws.bndes.gov.br/canal-mpme/#/home",
                 animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
+            },
+            {
+                src: "#avatar",
+                position: "-7 -0.5 2",
+                rotation: "0 90 0",
+                href: "https://reunioes.bndes.gov.br/falenometaverso",
+                animation: "property: scale; dir: alternate; dur:1000; easing: linear; from: 1.2 2.0 1.1; to: 1.1 2.0 1.1; loop: true; autoplay: true"                
             }
         ]
     },

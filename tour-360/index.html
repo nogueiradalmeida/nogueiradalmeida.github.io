@@ -13,6 +13,7 @@
   <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
   <script src="./redirect-to.js"></script>
   <script src="./play-pause-video.js"></script>
+  <script src="../video-360/play-on-click.js"></script>
   <script src="./mouse-cursor.js"></script>
   <script src="./play-at-video-frame.js"></script>
   <script src="./tour.js"></script>
@@ -27,6 +28,8 @@
       <img id="pin" crossorigin="anonymous" src="../assets/pin.png">
       <img id="canal" crossorigin="anonymous" src="../assets/canal_mpme2.png">
       <img id="contato" crossorigin="anonymous" src="../assets/contato.png">
+      <img id="placa-bem-vindo" crossorigin="anonymous" src="../assets/placas/seja-bem-vindo.png">
+      <img id="placa-orientacoes-gerais" crossorigin="anonymous" src="../assets/placas/orientacoes-gerais.png">
 
       <audio id="click-sound" crossorigin="anonymous"
         src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
@@ -46,6 +49,7 @@
       <a-asset-item id="robot" src="../assets/robot.gltf" response-type="arraybuffer" crossorigin="anonymous">
       </a-asset-item>
 
+      <video id="video-boas-vindas" autoplay preload="metadata" loop="false" src="../assets/boas-vindas-gaspar-360.mp4"></video>
       <video id="dicas_mpme" preload="metadata" loop="false" src="../assets/dica_mpme_1.mp4"
         poster="../assets/dicas_thumb.jpg"></video>
       <img id="dicas_mpme_thumb" crossorigin="anonymous" src="../assets/dicas_thumb.jpg">
@@ -53,10 +57,13 @@
     </a-assets>
 
     <!-- 360-degree image. -->
+    <!-- src="#corner-2005-reunioes" -->
     <a-sky tour id="image-360" radius="10" 
-      src="#corner-imprensa"
+      src="#corner-2005-reunioes"
+      visible="true"
       animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
-      animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade">
+      animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
+    >
     </a-sky>
 
     <!-- Camera + cursor. -->

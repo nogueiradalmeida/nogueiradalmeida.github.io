@@ -18,6 +18,7 @@ const addElements = (id, scene) => {
     if (!sphere) return;
 
     changeSkyRotation(sphere);
+    setTimeout(startSkyVideo, 1000);
     addWaypoints(sphere, scene);
     addVideos(sphere, scene);
     addImages(sphere, scene);
@@ -26,8 +27,20 @@ const addElements = (id, scene) => {
 
 const changeSkyRotation = (sphere, el) => {
     if (!sphere.rotation) return;
-    const sky = document.getElementById("image-360");
+    const sky = getSky();
     sky.setAttribute("rotation", sphere.rotation);
+}
+
+const startSkyVideo = () => {
+    const sky = getSky();
+    const videoEl = sky.components.material.data.src;
+    if (videoEl?.play) {
+        videoEl.play();  
+      }
+}
+
+const getSky = () => {
+    return document.getElementById("image-360");
 }
 
 const addWaypoints = (sphere, scene) => {
@@ -36,11 +49,12 @@ const addWaypoints = (sphere, scene) => {
     for (const waypoint of sphere.waypoints) {
         const entity = document.createElement('a-image');
  
-        entity.setAttribute("src", "#pin");
+        const src = waypoint.src || "#pin"
+        entity.setAttribute("src", src);
         entity.setAttribute("geometry", { primitive: 'plane', height: 1, width: 1 });
         entity.setAttribute("event-set__mouseenter", { scale: "1.2 1.2 1" });
         entity.setAttribute("event-set__mouseleave", { scale: "1 1 1" });
-        entity.setAttribute("event-set__click", { _target: "#image-360", _delay: 300, "material.src": waypoint.src });
+        entity.setAttribute("event-set__click", { _target: "#image-360", _delay: 300, "material.src": waypoint.scene });
         entity.setAttribute("proxy-event", { event: "click", to: "#image-360", as: "fade" });
         entity.setAttribute("position", waypoint.position);
         if (waypoint.rotation) {
@@ -53,7 +67,7 @@ const addWaypoints = (sphere, scene) => {
         entity.classList.add('gui');
         entity.classList.add('clickable');
         entity.addEventListener("click", () => {
-            const waypointId = waypoint.src.replace('#', '');
+            const waypointId = waypoint.scene.replace('#', '');
             clearElements(scene);
             addElements(waypointId, scene);
         });
@@ -150,7 +164,7 @@ const spheres = {
     "sala-de-reuniao-4-pessoas": {
         waypoints: [
             {
-                src: "#corner-sala-reuniao",
+                scene: "#corner-sala-reuniao",
                 position: "3 0 2",
                 rotation: "0 45 0",
                 animation: floatAnimation("3 0 2"),
@@ -161,13 +175,13 @@ const spheres = {
         rotation: "0 -45 0",
         waypoints: [
             {
-                src: "#corner-imprensa",
+                scene: "#corner-imprensa",
                 position: "9 0 0",
                 rotation: "0 90 0",
                 animation: floatAnimation("9 0 0")
             },
             {
-                src: "#sala-de-reuniao-4-pessoas",
+                scene: "#sala-de-reuniao-4-pessoas",
                 position: "-4 0 -.7",
                 rotation: "0 90 0 ",
                 animation: floatAnimation("-4 0 -.7")
@@ -175,12 +189,20 @@ const spheres = {
         ]
     },
     "sala-2007-reuniao-4-pessoas":{
+        rotation: "0 230 0",
         waypoints: [
             {
-                src: "#corner-2005-reunioes",
-                position: "-2 0 2",
-                rotation: "0 90 0",
-                animation: floatAnimation("-2 0 2"),
+                scene: "#corner-2005-reunioes",
+                position: "-0.5 0.5 2",
+                rotation: "0 0 0",
+                animation: floatAnimation("-0.5 0.5 2"),
+            }
+        ],
+        videos: [
+            { thumb: "#dicas_mpme_thumb", 
+              src: "dicas_mpme", 
+              position: "7.9 1.2 -3.9", 
+              rotation: "0 -110 0"
             }
         ]
     },
@@ -188,17 +210,17 @@ const spheres = {
         rotation: "0 -130 0",
         waypoints: [
             {
-                src: "#sala-imprensa",
+                scene: "#sala-imprensa",
                 position: "3 -1 -5",
                 animation: floatAnimation("3 -1 -5")
             },
             {
-                src: "#lounge-imprensa",
+                scene: "#lounge-imprensa",
                 position: "0 0 9",
                 animation: floatAnimation("0 0 9")
             },
             {
-                src: "#corner-sala-reuniao",
+                scene: "#corner-sala-reuniao",
                 position: "-9 0 -1",
                 rotation: "0 90 0",
                 animation: floatAnimation("-9 0 -1"),
@@ -225,7 +247,7 @@ const spheres = {
         rotation: "0 90 0",
         waypoints: [
             {
-                src: "#lounge-imprensa",
+                scene: "#lounge-imprensa",
                 position: "-0.2 -0.5 9",
                 animation: floatAnimation("-0.2 -0.5 9")
             }, //entrada sala
@@ -241,35 +263,60 @@ const spheres = {
         ]
     },
     "corner-2005-reunioes" : {
-        rotation: "0 180 0",
+        rotation: "0 0 0",
         waypoints: [
             {
-                src: "#corner-2001-multiuso",
-                position: "0.2 0.2 -9",
-                animation: floatAnimation("0.2 0.2 -9")
+                scene: "#corner-2001-multiuso",
+                position: "-0.4 -0.4 8",
+                animation: floatAnimation("-0.4 -0.4 8")
             }, //entrada sala            
             {
-                src: "#sala-2007-reuniao-4-pessoas",
-                position: "-1.0 -0.4 5",
+                scene: "#sala-2007-reuniao-4-pessoas",
+                src: "#placa-orientacoes-gerais",
+                position: "0.8 0.2 -5",
                 rotation: "0 0 0",
-                animation: floatAnimation("-1.0 -0.4 5")
-            },//outro canto da sala            
+                animation: floatAnimation("0.8 0.2 -5")
+            },//outro canto da sala          
+            {
+                scene: "#video-boas-vindas",
+                src: "#placa-bem-vindo",
+                position: "-0.6 0.2 -5",
+                rotation: "0 0 0",
+                animation: floatAnimation("-0.6 0.2 -5")
+            },  
+            {
+                scene: "#corner-sala-reuniao",
+                position: "3.5 -0.2 -3",
+                rotation: "0 -90 0",
+                animation: floatAnimation("3.5 -0.2 -3")
+            }
         ],
         models: [
             {
                 src: "#robot",
                 href: "https://chatbot.bndes.gov.br/atendimento",
                 scale: "2.1 2.1 2.1",
-                position: "-5.5 -3.2 -3",
-                rotation: "0 90 0",
+                position: "5.5 -3.2 -1",
+                rotation: "0 -90 0",
             }
         ]
-    },   
+    },
+    "video-boas-vindas" : {
+        rotation: "0 125 0",
+        waypoints: [
+            {
+                scene: "#corner-2005-reunioes",
+                position: "-2.7 -.5 3",
+                animation: floatAnimation("-2.7 -.5 3"),
+                rotation: "0 -45 0",
+            }
+        ],
+    },
     "sala-imprensa": {
         rotation: "0 192 0",
         waypoints: [
             {
-                src: "#corner-imprensa",
+                scene: "#corner-imprensa",
                 position: "5.7 -0.5 5",
                 animation: floatAnimation("5.7 -0.5 5")
             }, //entrada sala
@@ -288,7 +335,7 @@ const spheres = {
         rotation: "0 192 0",
         waypoints: [
             {
-                src: "#corner-2001-multiuso",
+                scene: "#corner-2001-multiuso",
                 position: "5.7 -0.5 5",
                 animation: floatAnimation("5.7 -0.5 5")
             }, //entrada sala
@@ -298,18 +345,18 @@ const spheres = {
         rotation: "0 180 0",
         waypoints: [
             {
-                src: "#corner-imprensa",
+                scene: "#corner-imprensa",
                 position: "2.2 0.2 -9",
                 animation: floatAnimation("2.2 0.2 -9")
             }, //entrada sala
             {
-                src: "#hall-elevadores",
+                scene: "#hall-elevadores",
                 position: "-8 0 -0.2",
                 rotation: "0 90 0",
                 animation: floatAnimation("-8 0 -0.2")
             }, //hall elevadores
             {
-                src: "#corner-2001-multiuso",
+                scene: "#corner-2001-multiuso",
                 position: "-1.5 -0.9 5",
                 rotation: "0 0 0",
                 animation: floatAnimation("-1.5 -0.9 5")
@@ -329,18 +376,18 @@ const spheres = {
         rotation: "0 -110 0",
         waypoints: [
             {
-                src: "#lounge-imprensa",
+                scene: "#lounge-imprensa",
                 position: "-4.2 -0.5 -1",
                 rotation: "0 100 0",
                 animation: floatAnimation("-4.2 -0.5 -1")
             }, //entrada sala
             {
-                src: "#corner-2005-reunioes",
+                scene: "#corner-2005-reunioes",
                 position: "-2.2 -0.5 9",
                 animation: floatAnimation("-2.2 -0.5 9")
             }, //corredor
             {
-                src: "#sala-multiuso-centro",
+                scene: "#sala-multiuso-centro",
                 position: "4.2 -0.5 -3",
                 rotation: "0 100 0",
                 animation: floatAnimation("4.2 -0.5 -3")

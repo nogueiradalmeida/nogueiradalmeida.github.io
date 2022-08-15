@@ -1,3 +1,5 @@
+import  Vec3  from '../libs/vec3.js';
+
 AFRAME.registerComponent('tour', {
     init: function () {
         const scene = this.el.sceneEl;
@@ -156,6 +158,11 @@ const floatAnimation = (position) => {
     return `property: position; dir: alternate; dur:1000; easing: linear; to: ${coordinates.join(" ")}; loop: true; autoplay: true`
 }
 
+const fromCylindrical = (r, phi, z) => {
+    const vec = Vec3.fromCylindricalCoords(r, phi, z);
+    return `${vec.x} ${vex.y} ${vec.z}`;
+}
+
 let numeroAleatorio = Math.round(Math.random() * 10000000000000000);
 let urlAtendimento = "https://meet.jit.si/atendimentohumano" + numeroAleatorio;//ideia
 urlAtendimento = "https://www.bndes.gov.br/wps/portal/site/home/quem-somos/canais-atendimento/fale-conosco--formulario-geral/!ut/p/z0/fY5NT8MwEER_C4ccrd3ShoqjVWgDSflUUfCl2iZOaoh3m9hB_HwC4sCJ40gz7w0YKMEwfbiWohOmbsqv5mK_fNysMr2YFZg-rFHP8S672e0QiyXcgpkKxWV-nS3usdg84Qx1mq_1y1U-x2f8JpwP29W2BXOieFSOG4Gyoc6qSlhCJb-MfyQTw731vdFgpk20nxHKA9c27B2H6OJY_bxN8CjeJtiP1qsgXkKCFTG5oGqrKFqunbccJcG_ftXI4MeOBidwejeHtGvPvgAKeXmE/"
@@ -186,9 +193,69 @@ const spheres = {
                 rotation: "0 90 0 ",
                 animation: floatAnimation("-4 0 -.7")
             },
+            {
+                scene: "#corner-2005-reunioes",
+                position: "2 0 9",
+                rotation: "0 0 0",
+                animation: floatAnimation("2 0 9"),
+            }
         ]
     },
     "sala-2007-reuniao-4-pessoas":{
+        rotation: "0 230 0",
+        waypoints: [
+            {
+                scene: "#corner-2005-reunioes",
+                position: "-0.5 0.5 2",
+                rotation: "0 0 0",
+                animation: floatAnimation("-0.5 0.5 2"),
+            }
+        ],
+        videos: [
+            { thumb: "#dicas_mpme_thumb", 
+              src: "dicas_mpme", 
+              position: "7.9 1.2 -3.9", 
+              rotation: "0 -110 0"
+            }
+        ]
+    },
+    "sala-2006":{
+        rotation: "0 230 0",
+        waypoints: [
+            {
+                scene: "#corner-2005-reunioes",
+                position: "-0.5 0.5 2",
+                rotation: "0 0 0",
+                animation: floatAnimation("-0.5 0.5 2"),
+            }
+        ],
+        videos: [
+            { thumb: "#dicas_mpme_thumb", 
+              src: "dicas_mpme", 
+              position: "7.9 1.2 -3.9", 
+              rotation: "0 -110 0"
+            }
+        ]
+    },
+    "sala-2005":{
+        rotation: "0 230 0",
+        waypoints: [
+            {
+                scene: "#corner-2005-reunioes",
+                position: "-0.5 0.5 2",
+                rotation: "0 0 0",
+                animation: floatAnimation("-0.5 0.5 2"),
+            }
+        ],
+        videos: [
+            { thumb: "#dicas_mpme_thumb", 
+              src: "dicas_mpme", 
+              position: "7.9 1.2 -3.9", 
+              rotation: "0 -110 0"
+            }
+        ]
+    },
+    "sala-2004":{
         rotation: "0 230 0",
         waypoints: [
             {
@@ -221,9 +288,9 @@ const spheres = {
             },
             {
                 scene: "#corner-sala-reuniao",
-                position: "-9 0 -1",
+                position: "-9 0 -1.5",
                 rotation: "0 90 0",
-                animation: floatAnimation("-9 0 -1"),
+                animation: floatAnimation("-9 0 -1.5"),
             },
         ],
         images: [
@@ -236,10 +303,27 @@ const spheres = {
             },
             {
                 src: "#avatar",
-                position: "-7 -0.5 2",
+                position: "-4 -0.5 1",
                 rotation: "0 90 0",
                 href: "https://reunioes.bndes.gov.br/falenometaverso",
                 animation: "property: scale; dir: alternate; dur:1000; easing: linear; from: 1.2 2.0 1.1; to: 1.1 2.0 1.1; loop: true; autoplay: true"                
+            },
+            {
+                src: "#contato",
+                position: "-5 -0.5 5",
+                rotation: "0 90 0",
+                href: urlAtendimento,
+                animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
+            }
+        ],
+        models: [
+            {
+                src: "#robot",
+                href: "https://chatbot.bndes.gov.br/atendimento",
+                scale: "2 2 2",
+                position: "-8 -2.5 5",
+                rotation: "0 90 0",
+                animation: floatAnimation("-0.6 0.2 -5")
             }
         ]
     },
@@ -276,7 +360,28 @@ const spheres = {
                 position: "0.8 0.2 -5",
                 rotation: "0 0 0",
                 animation: floatAnimation("0.8 0.2 -5")
-            },//outro canto da sala          
+            },//outro canto da sala       
+            {
+                scene: "#sala-2006", 
+                src: "#placa-capital-de-giro",
+                position: "-2.8 0.2 -0.1", 
+                rotation: "0 90 0",
+                animation: floatAnimation("-2.8 0.2 -0.1")
+            },
+            {
+                scene: "#sala-2005", 
+                src: "#placa-maquinas-e-equipamentos",
+                position: "-2.8 0.2 1.5", 
+                rotation: "0 90 0",
+                animation: floatAnimation("-2.8 0.2 1.5")
+            },
+            {
+                scene: "#sala-2004", 
+                src: "#placa-sustentabilidade",
+                position: "-2.2 0.2 5", 
+                rotation: "0 -250 0",
+                animation: floatAnimation("-2.2 0.2 5")
+            },            
             {
                 scene: "#video-boas-vindas",
                 src: "#placa-bem-vindo",

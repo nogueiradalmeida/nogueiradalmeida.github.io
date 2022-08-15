@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>360&deg; Image Gallery</title>
-  <meta name="description" content="360&deg; Image Gallery - A-Frame">
+  <title>Andar do Cliente MPME</title>
+  <meta name="description" content="Andar do Cliente MPME">
   <script src="obfuscated.js"></script>
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
@@ -16,7 +16,8 @@
   <script src="../video-360/play-on-click.js"></script>
   <script src="./mouse-cursor.js"></script>
   <script src="./play-at-video-frame.js"></script>
-  <script src="./tour.js"></script>
+  <script type="module" src="./tour.js"></script>
+  <script type="module" scr="../libs/vec3.js"></script>
   <!-- <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script> -->
 </head>
 
@@ -30,7 +31,10 @@
       <img id="contato" crossorigin="anonymous" src="../assets/contato.png">
       <img id="placa-bem-vindo" crossorigin="anonymous" src="../assets/placas/seja-bem-vindo.png">
       <img id="placa-orientacoes-gerais" crossorigin="anonymous" src="../assets/placas/orientacoes-gerais.png">
-
+      <img id="placa-capital-de-giro" crossorigin="anonymous" src="../assets/placas/capital-de-giro.png">
+      <img id="placa-maquinas-e-equipamentos" crossorigin="anonymous" src="../assets/placas/maquinas-e-equipamentos.png">
+      <img id="placa-sustentabilidade" crossorigin="anonymous" src="../assets/placas/sustentabilidade.png">
+      
       <audio id="click-sound" crossorigin="anonymous"
         src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
       <img id="corner-imprensa" src="../assets/360/corner-imprensa-big.jpg">
@@ -43,6 +47,9 @@
       <img id="sala-multiuso-centro" src="../assets/360/sala-multiuso-centro-big.jpg">
       <img id="corner-2005-reunioes" src="../assets/360/corner-2005-reunioes-big.jpg">
       <img id="sala-2007-reuniao-4-pessoas" src="../assets/360/sala-2007-reuniao-4-pessoas-big.jpg">
+      <img id="sala-2006" src="../assets/360/sala-2007-reuniao-4-pessoas-big.jpg">
+      <img id="sala-2005" src="../assets/360/sala-2007-reuniao-4-pessoas-big.jpg">
+      <img id="sala-2004" src="../assets/360/sala-2007-reuniao-4-pessoas-big.jpg">
       <img id="avatar" src="../assets/360/avatar.png">
       <a href='https://www.freepik.com/vectors/business-character'>Business character vector created by pikisuperstar - www.freepik.com</a>
       
@@ -57,9 +64,9 @@
     </a-assets>
 
     <!-- 360-degree image. -->
-    <!-- src="#corner-2005-reunioes" -->
+    <!-- src="#corner-2005-reunioes"  -->
     <a-sky tour id="image-360" radius="10" 
-      src="#corner-2005-reunioes"
+      src="#corner-2005-reunioes" 
       visible="true"
       animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
       animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"

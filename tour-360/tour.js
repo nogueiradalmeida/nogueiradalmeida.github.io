@@ -59,8 +59,11 @@ const addWaypoints = (sphere, scene) => {
         entity.setAttribute("event-set__click", { _target: "#image-360", _delay: 300, "material.src": waypoint.scene });
         entity.setAttribute("proxy-event", { event: "click", to: "#image-360", as: "fade" });
         entity.setAttribute("position", waypoint.position);
+
         if (waypoint.rotation) {
             entity.setAttribute("rotation", waypoint.rotation);
+        } else {
+            entity.setAttribute("look-at", "[camera]");
         }
         if (waypoint.animation) {
             entity.setAttribute("animation", waypoint.animation)
@@ -154,13 +157,24 @@ const addModels = (sphere, scene) => {
 
 const floatAnimation = (position) => {
     const coordinates = position.split(" ");
-    coordinates[1] = Number(coordinates[1]) + 0.1;
+    coordinates[1] = (Number(coordinates[1]) + 0.1).toFixed(2);
     return `property: position; dir: alternate; dur:1000; easing: linear; to: ${coordinates.join(" ")}; loop: true; autoplay: true`
 }
 
-const fromCylindrical = (r, phi, z) => {
-    const vec = Vec3.fromCylindricalCoords(r, phi, z);
-    return `${vec.x} ${vex.y} ${vec.z}`;
+const floatAnimationCylindrical= (distance, degrees, height) => {
+    return floatAnimation(fromCylindrical(distance, degrees, height));
+}    
+
+const fromCylindrical = (distance, degrees, height) => {
+    const radians = toRadians(degrees);
+    const vec = Vec3.fromCylindricalCoords(distance, radians, height);
+    const coords = `${vec.x.toFixed(2)} ${vec.z.toFixed(2)} ${vec.y.toFixed(2)}`;
+
+    return coords;
+}
+
+const toRadians = (degrees) => {
+    return degrees * Math.PI /180;
 }
 
 let numeroAleatorio = Math.round(Math.random() * 10000000000000000);
@@ -295,13 +309,6 @@ const spheres = {
         ],
         images: [
             {
-                src: "#canal",
-                position: "-5.95 0.9 -3.1",
-                rotation: "1 0 0",
-                href: "https://ws.bndes.gov.br/canal-mpme/#/home",
-                animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
-            },
-            {
                 src: "#avatar",
                 position: "-4 -0.5 1",
                 rotation: "0 90 0",
@@ -351,8 +358,10 @@ const spheres = {
         waypoints: [
             {
                 scene: "#corner-2001-multiuso",
-                position: "-0.4 -0.4 8",
-                animation: floatAnimation("-0.4 -0.4 8")
+                // position: "-0.4 -0.4 8",
+                position: fromCylindrical(8, 90, 0),
+                // animation: floatAnimation("-0.4 -0.4 8")
+                animation: floatAnimationCylindrical(8, 90, 0)
             }, //entrada sala            
             {
                 scene: "#sala-2007-reuniao-4-pessoas",
@@ -395,16 +404,17 @@ const spheres = {
                 rotation: "0 -90 0",
                 animation: floatAnimation("3.5 -0.2 -3")
             }
-        ],
-        models: [
-            {
-                src: "#robot",
-                href: "https://chatbot.bndes.gov.br/atendimento",
-                scale: "2.1 2.1 2.1",
-                position: "5.5 -3.2 -1",
-                rotation: "0 -90 0",
-            }
         ]
+        // ,
+        // models: [
+        //     {
+        //         src: "#robot",
+        //         href: "https://chatbot.bndes.gov.br/atendimento",
+        //         scale: "2.1 2.1 2.1",
+        //         position: "5.5 -3.2 -1",
+        //         rotation: "0 -90 0",
+        //     }
+        // ]
     },
     "video-boas-vindas" : {
         rotation: "0 125 0",
@@ -466,16 +476,17 @@ const spheres = {
                 rotation: "0 0 0",
                 animation: floatAnimation("-1.5 -0.9 5")
             },//outro canto da sala            
-        ],
-        models: [
-            {
-                src: "#robot",
-                href: "https://chatbot.bndes.gov.br/atendimento",
-                scale: "2.1 2.1 2.1",
-                position: "-5.5 -3.2 -3",
-                rotation: "0 90 0",
-            }
         ]
+        // ,
+        // models: [
+        //     {
+        //         src: "#robot",
+        //         href: "https://chatbot.bndes.gov.br/atendimento",
+        //         scale: "2.1 2.1 2.1",
+        //         position: "-5.5 -3.2 -3",
+        //         rotation: "0 90 0",
+        //     }
+        // ]
     },
     "corner-2001-multiuso": {
         rotation: "0 -110 0",
@@ -501,10 +512,17 @@ const spheres = {
         ],
 
         images: [
+            // {
+            //     src: "#contato",
+            //     position: "0.4 -1.0 -4",
+            //     href: urlAtendimento,
+            //     animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
+            // }
             {
-                src: "#contato",
-                position: "0.4 -1.0 -4",
-                href: urlAtendimento,
+                src: "#canal",
+                position: "-0.2 -0.2 -2.8",
+                rotation: "0 -25 0",
+                href: "https://ws.bndes.gov.br/canal-mpme/#/home",
                 animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
             }
         ]

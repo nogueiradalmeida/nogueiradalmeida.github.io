@@ -244,8 +244,8 @@ const spheres = {
             }
         ],
         videos: [
-            { thumb: "#dicas_mpme_thumb", 
-              src: "dicas_mpme", 
+            { thumb: "#video-giro", 
+              src: "video-giro", 
               position: "7.9 1.2 -3.9", 
               rotation: "0 -110 0"
             }
@@ -262,8 +262,8 @@ const spheres = {
             }
         ],
         videos: [
-            { thumb: "#dicas_mpme_thumb", 
-              src: "dicas_mpme", 
+            { thumb: "#video-maquina", 
+              src: "video-maquina", 
               position: "7.9 1.2 -3.9", 
               rotation: "0 -110 0"
             }
@@ -280,8 +280,8 @@ const spheres = {
             }
         ],
         videos: [
-            { thumb: "#dicas_mpme_thumb", 
-              src: "dicas_mpme", 
+            { thumb: "#video-sustentabilidade", 
+              src: "video-sustentabilidade", 
               position: "7.9 1.2 -3.9", 
               rotation: "0 -110 0"
             }
@@ -342,16 +342,27 @@ const spheres = {
                 position: "-0.2 -0.5 9",
                 animation: floatAnimation("-0.2 -0.5 9")
             }, //entrada sala
+            {
+                scene: "#corner-2005-reunioes",
+                position: fromCylindrical(4, -100, 0),
+                rotation: "0 0 0",
+                animation: floatAnimationCylindrical(4, -100, 0)
+            }
         ],
 
         images: [
             {
-                src: "#contato",
-                position: "0.4 -1.0 -4",
-                href: urlAtendimento,
-                animation: "property: scale; dir: alternate; dur:1000; easing: linear; to: 1.1 1.1 1.1; loop: true; autoplay: true"
+                src: "#mapa_andar",
+                position: fromCylindrical(1.5, -70, 0),
+                
+                animation: floatAnimationCylindrical(1.5, -70, 0)
             }
-        ]
+        ],
+
+        
+        // videos: [
+        //      { thumb: "#mapa_andar", src: "dicas_mpme", position: "0.4 -1.0 -4" }
+        // ]
     },
     "corner-2005-reunioes" : {
         rotation: "0 0 0",
@@ -369,7 +380,12 @@ const spheres = {
                 position: "0.8 0.2 -5",
                 rotation: "0 0 0",
                 animation: floatAnimation("0.8 0.2 -5")
-            },//outro canto da sala       
+            },//outro canto da sala   
+            {
+                scene: "#hall-elevadores",
+                position: fromCylindrical(8, -10, 0),
+                animation: floatAnimationCylindrical(8, -10, 0)
+            },    
             {
                 scene: "#sala-2006", 
                 src: "#placa-capital-de-giro",
@@ -417,12 +433,12 @@ const spheres = {
         // ]
     },
     "video-boas-vindas" : {
-        rotation: "0 125 0",
+        rotation: "0 300 0",
         waypoints: [
             {
                 scene: "#corner-2005-reunioes",
-                position: "-2.7 -.5 3",
-                animation: floatAnimation("-2.7 -.5 3"),
+                position: fromCylindrical(4, -40, 0),
+                animation: floatAnimationCylindrical(4, -40, 0),
                 rotation: "0 -45 0",
             }
         ],
